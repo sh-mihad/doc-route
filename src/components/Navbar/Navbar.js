@@ -10,11 +10,12 @@ const Navbar = () => {
 
     const menuItem = <>
     <li className='font-semibold '><Link to="/">Home</Link></li>
-    <li className='font-semibold '><Link to="/">Blog</Link></li>
+    {/* <li className='font-semibold '><Link to="/">Blog</Link></li> */}
     <li className='font-semibold '><Link to="/register">Register</Link></li>
-  {
+    <li className='font-semibold '><Link to="/login">Login</Link></li>
+  {/* {
     user?.uid &&   <li className='font-semibold '><Link to="/dashboard">Dashboard</Link></li>
-  }
+  } */}
 </>
 
 const handleLogout = () => {
