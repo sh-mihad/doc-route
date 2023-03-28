@@ -24,65 +24,69 @@ const Register = () => {
 
       
 
-        // const formData = new FormData();
-        // console.log(formData); 
-        // formData.append('image', data.photo[0]);
+        const formData = new FormData();
+         
+        formData.append('image', data.photo[0]);
 
-        // console.log(formData);
 
-        // fetch('https://api.imgbb.com/1/upload?key=2fbe1796a4bf3cd52ba5028ba7992a29', {
-        //     method: 'POST',
-        //     body: formData
-        // })
-        //     .then(response => response.json())
-        //     .then(result => {
-        //         if (result.success) {
-        //             const image = result.data.display_url
+        fetch('https://api.imgbb.com/1/upload?key=2fbe1796a4bf3cd52ba5028ba7992a29', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    const image = result.data.display_url
                     
-        //             createUserAccoutn(email, password)
-        //                 .then(res => {
-        //                     const user = res.user
-        //                     console.log(user);
-        //                     updateName(name, image)
-        //                         .then(() => {
-        //                             const currentUser = {
-        //                                 name,
-        //                                 email,
+                    createUserAccoutn(email, password)
+                        .then(res => {
+                            const user = res.user
+                            console.log(user);
+                            updateName(name, image)
+                                .then(() => {
+                                    const currentUser = {
+                                        name,
+                                        email,
+                                       
+                                    }
+                                    const petaintData = {
+                                        name,
+                                        email,
+                                        password,
+                                        mobile,
+                                        address,
+                                        age,
+                                        gender,
+                                        image
+                                        
+                                       }
+                                       insertPateintData(petaintData)
+                                    reset()
 
-        //                             }
-                                    
-        //                             reset()
+                                })
+                                .catch(err => console.log(err.message))
+                        })
+                        .catch(err => {
+                            console.log(err.message)
+                        })
+                }
+            })
 
-        //                         })
-        //                         .catch(err => console.log(err.message))
-        //                 })
-        //                 .catch(err => {
-        //                     console.log(err.message)
-        //                 })
-        //         }
-        //     })
+     
 
-        const petaintData = {
-            name,
-            email,
-            password,
-            mobile,
-            address,
-            age,
-            gender,
-            
-           }
-    
-          fetch("http://localhost:5000/pateint",{
+
+    }
+
+    const insertPateintData =(data)=>{
+        
+        fetch("http://localhost:5000/pateint",{
             method: "POST",
             headers:{
-                "content-type":"application/json"
+                'Content-Type': 'application/json'
             },
-            body : JSON.stringify(petaintData)
+            body : JSON.stringify(data)
           }).then(res=>res.json())
           .then(data=>console.log(data))
-
-
     }
 
     // google login hanlder
